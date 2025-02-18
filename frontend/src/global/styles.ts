@@ -8,7 +8,9 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         font-size: 62.5%;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Montserrat", serif;
+        font-optical-sizing: auto;
+        font-style: normal;
     }
 
     input {
