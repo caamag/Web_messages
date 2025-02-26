@@ -1,8 +1,0 @@
----Arquivo dedicado para anotações de comando do terminal---
-
-
----PRISMA---
-
-iniciar o prisma = npx prisma init --datasource-provider sqlite
-gerar banco de dados no = npx prisma migrate dev --name init
-
