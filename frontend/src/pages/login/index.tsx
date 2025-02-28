@@ -1,21 +1,25 @@
 import * as Css from "./style";
-import { loginHelper } from "./helper";
+import { useState } from "react";
 
 //components
 import LoginComponent from "../../components/loginForm";
 import RegisterComponent from "../../components/registerForm";
 
 const LoginPage = () => {
-  const helper = loginHelper();
+  const [isNewUser, setIsNewUser] = useState<boolean>(false);
+
+  const changeVisibility = () => {
+    setIsNewUser(!isNewUser);
+  };
 
   return (
     <Css.LoginContainer>
       <h1>Web_ Messages</h1>
 
-      {!helper.isNewUser ? (
-        <LoginComponent changeVisibility={helper.changeVisibility} />
+      {!isNewUser ? (
+        <LoginComponent changeVisibility={changeVisibility} />
       ) : (
-        <RegisterComponent changeVisibility={helper.changeVisibility} />
+        <RegisterComponent changeVisibility={changeVisibility} />
       )}
     </Css.LoginContainer>
   );

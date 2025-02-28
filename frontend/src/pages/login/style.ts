@@ -61,7 +61,7 @@ export const LoginContainer = styled.div`
   button {
     background: none;
     border: none;
-    color: blue;
+    color: ${Colors.darkBlue};
     margin-left: 15px;
   }
 
