@@ -18,10 +18,12 @@ export const useAuthentication = () => {
     if (pass !== confirmPass) {
       setError(true);
       setErrorMessage("Senhas divergentes");
+      setLoading(false);
       return;
     } else if (pass.length <= 7) {
       setError(true);
       setErrorMessage("Senha fraca");
+      setLoading(false);
       return;
     }
 

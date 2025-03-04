@@ -14,9 +14,7 @@ const RegisterComponent = ({ changeVisibility }: LoginProps) => {
   const [pass, setPass] = useState<string>("");
   const [confirmPass, setConfirmPass] = useState<string>("");
 
-  const onSubmit = () => {
-    authentication.handleRegister("", "", "");
-  };
+  console.log(authentication.errorMessage);
 
   if (authentication.loading) {
     return <>carregando...</>;
@@ -58,7 +56,13 @@ const RegisterComponent = ({ changeVisibility }: LoginProps) => {
         }}
       />
 
-      <Button width="100%" styleType="default">
+      <Button
+        width="100%"
+        styleType="default"
+        onClick={() => {
+          authentication.handleRegister(email, pass, confirmPass);
+        }}
+      >
         Register
       </Button>
       <p>
