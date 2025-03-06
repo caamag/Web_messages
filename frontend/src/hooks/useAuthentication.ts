@@ -20,17 +20,18 @@ export const useAuthentication = () => {
       setErrorMessage("Senhas divergentes");
       setLoading(false);
       return;
-    } else if (pass.length <= 7) {
-      setError(true);
-      setErrorMessage("Senha fraca");
-      setLoading(false);
-      return;
     }
 
-    const response = await registerUser(email, pass);
-    console.log(response);
-    navigate("/");
-    setLoading(false);
+    try {
+      const response = await registerUser(email, pass);
+      navigate("/");
+      console.log(response);
+    } catch (error) {
+      setError(true);
+      setErrorMessage("Erro inesperado, tente novamente mais tarde.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {

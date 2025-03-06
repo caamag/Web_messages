@@ -3,6 +3,9 @@ import { useAuthentication } from "../../hooks/useAuthentication";
 import { useState } from "react";
 import { Button } from "../UI/button";
 
+//components
+import Toast from "../toastMessage";
+
 interface LoginProps {
   changeVisibility: () => void;
 }
@@ -14,14 +17,16 @@ const RegisterComponent = ({ changeVisibility }: LoginProps) => {
   const [pass, setPass] = useState<string>("");
   const [confirmPass, setConfirmPass] = useState<string>("");
 
-  console.log(authentication.errorMessage);
-
   if (authentication.loading) {
     return <>carregando...</>;
   }
 
   return (
     <Css.RegisterContainer>
+      {authentication.error && (
+        <Toast type="error" message={authentication.errorMessage} />
+      )}
+
       <h3>Register</h3>
       <p>to create your account</p>
       <br />
@@ -59,6 +64,7 @@ const RegisterComponent = ({ changeVisibility }: LoginProps) => {
       <Button
         width="100%"
         styleType="default"
+        type="submit"
         onClick={() => {
           authentication.handleRegister(email, pass, confirmPass);
         }}
