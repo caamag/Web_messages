@@ -11,13 +11,8 @@ export const registerUser = async (email: string, pass: string) => {
 };
 
 export const loginUser = async (email: string, pass: string) => {
-  try {
-    const response = await signInWithEmailAndPassword(auth, email, pass);
-    console.log(response);
-    return response;
-  } catch (error) {
-    throw new Error(`Erro no login do usuário | ${error}`);
-  }
+  const response = await signInWithEmailAndPassword(auth, email, pass);
+  return response;
 };
 
 export const logOut = () => {

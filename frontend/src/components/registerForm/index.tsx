@@ -5,6 +5,7 @@ import { Button } from "../UI/button";
 
 //components
 import Toast from "../toastMessage";
+import Loader from "../loader";
 
 interface LoginProps {
   changeVisibility: () => void;
@@ -18,7 +19,7 @@ const RegisterComponent = ({ changeVisibility }: LoginProps) => {
   const [confirmPass, setConfirmPass] = useState<string>("");
 
   if (authentication.loading) {
-    return <>carregando...</>;
+    return <Loader />;
   }
 
   return (

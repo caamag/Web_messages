@@ -1,4 +1,4 @@
-import { registerUser } from "../services/auth";
+import { registerUser, loginUser } from "../services/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,16 +19,43 @@ export const useAuthentication = () => {
       setError(true);
       setErrorMessage("Senhas divergentes");
       setLoading(false);
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
       return;
     }
 
     try {
-      const response = await registerUser(email, pass);
+      await registerUser(email, pass);
       navigate("/");
-      console.log(response);
     } catch (error) {
       setError(true);
-      setErrorMessage("Erro inesperado, tente novamente mais tarde.");
+      setErrorMessage("Erro ao criar conta. Tente novamente mais tarde.");
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const hanldeLogin = async (email: string, pass: string) => {
+    if (!email || !pass) {
+      setError(true);
+      setErrorMessage("Informe o email e a senha.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await loginUser(email, pass);
+      navigate("/");
+    } catch (error) {
+      setError(true);
+      setErrorMessage("Erro ao logar, Tente novamente mais tarde.");
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
     } finally {
       setLoading(false);
     }
@@ -36,6 +63,7 @@ export const useAuthentication = () => {
 
   return {
     handleRegister,
+    hanldeLogin,
     loading,
     error,
     errorMessage,

@@ -1,8 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-export const fadeInToast = keyframes`
-    
-`;
+import styled from "styled-components";
 
 export const ToastContainer = styled.div<{ type: string }>`
   width: 250px;
