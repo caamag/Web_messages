@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
     input {
         border: none;
+        outline: none;
     }
 
     a {
@@ -24,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
     button{
         cursor: pointer;
+        border: none;
     }
 `;
 

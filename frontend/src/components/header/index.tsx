@@ -11,14 +11,12 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { user } = useAuth();
 
-  console.log(user);
-
   return (
     <Css.Header>
       {isOpen && (
         <Css.ProfileSettingContainer>
           <Css.ProfileSettingsList>
-            <NavLink to={"/"}>
+            <NavLink to={"/profile"}>
               <Css.ProfileSettingsItem>Profile</Css.ProfileSettingsItem>
             </NavLink>
 
