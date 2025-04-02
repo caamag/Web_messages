@@ -11,7 +11,8 @@ export const useAuthentication = () => {
   const handleRegister = async (
     email: string,
     pass: string,
-    confirmPass: string
+    confirmPass: string,
+    name: string
   ) => {
     setLoading(true);
 
@@ -21,19 +22,19 @@ export const useAuthentication = () => {
       setLoading(false);
       setTimeout(() => {
         setError(false);
-      }, 5000);
+      }, 4000);
       return;
     }
 
     try {
-      await registerUser(email, pass);
+      await registerUser(email, pass, name);
       navigate("/");
     } catch (error) {
       setError(true);
       setErrorMessage("Erro ao criar conta. Tente novamente mais tarde.");
       setTimeout(() => {
         setError(false);
-      }, 5000);
+      }, 4000);
     } finally {
       setLoading(false);
     }
@@ -55,7 +56,7 @@ export const useAuthentication = () => {
       setErrorMessage("Erro ao logar, Tente novamente mais tarde.");
       setTimeout(() => {
         setError(false);
-      }, 5000);
+      }, 4000);
     } finally {
       setLoading(false);
     }
