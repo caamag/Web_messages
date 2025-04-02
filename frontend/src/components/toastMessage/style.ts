@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const ToastContainer = styled.div<{ type: string }>`
   width: 250px;
   position: absolute;
+  z-index: 5;
   right: 15px;
   top: 15px;
+  font-size: 16px;
   background-color: white;
   box-shadow: 0px 0px 10px gray;
   padding: 20px;

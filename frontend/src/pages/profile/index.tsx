@@ -2,38 +2,103 @@ import * as Css from "./style";
 import { Container, Content } from "../../global/styles";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
+import { UserUser } from "../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
+
+//compoenents
+import Toast from "../../components/toastMessage";
+import Loader from "../../components/loader";
+import { Button } from "../../components/UI/button";
 
 const ProfilePage = () => {
   const { user } = useAuth();
+  const userHook = UserUser();
+  const navigate = useNavigate();
 
   const [imageUrl, setImageUrl] = useState<string>("");
   const [name, setName] = useState<string>("");
 
+  const handleUpdate = () => {
+    if (imageUrl) {
+      userHook.handleUpdateUserPhoto(imageUrl);
+    }
+    if (name) {
+      userHook.handleUpdateUserName(name);
+    }
+  };
+
   return (
     <Container>
+      {userHook.error && (
+        <Toast message="Error updating user data!" type="error" />
+      )}
+
+      {userHook.success && (
+        <Toast message="User data updated successfully!" type="success" />
+      )}
+
       <Content>
         <Css.ProfileContainer>
-          <Css.ProfilePhoto />
+          {userHook.loading ? (
+            <Loader />
+          ) : (
+            <>
+              <Css.ProfilePhoto photo={user?.photoURL || ""} />
 
-          <input
-            type="text"
-            placeholder="Image URL:"
-            value={imageUrl}
-            onChange={(e) => {
-              setImageUrl(e.target.value);
-            }}
-          />
+              <label>
+                Profile image:
+                <br />
+                <input
+                  type="text"
+                  placeholder="Image URL:"
+                  value={imageUrl}
+                  onChange={(e) => {
+                    setImageUrl(e.target.value);
+                  }}
+                />
+              </label>
 
-          <input
-            type="text"
-            placeholder={user?.displayName || "Withou name:"}
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
+              <label>
+                Name:
+                <br />
+                <input
+                  type="text"
+                  placeholder="Insert your name:"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+              </label>
 
-          <input type="text" placeholder={user?.email || ""} disabled />
+              <label>
+                Email:
+                <br />
+                <input type="text" placeholder={user?.email || ""} disabled />
+              </label>
+              <br />
+
+              <Css.BtnContainer>
+                <Button
+                  styleType="red"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  Back
+                </Button>
+
+                <Button
+                  styleType="default"
+                  onClick={() => {
+                    handleUpdate();
+                  }}
+                >
+                  Submit Data
+                </Button>
+              </Css.BtnContainer>
+            </>
+          )}
         </Css.ProfileContainer>
       </Content>
     </Container>
