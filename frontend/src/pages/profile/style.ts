@@ -20,7 +20,7 @@ export const ProfileContainer = styled.div`
 
   input {
     width: 400px;
-    padding: 20px 30px;
+    padding: 15px 30px;
     color: gray;
     background: none;
     border: 1px solid ${Colors.lightGray};
@@ -33,11 +33,29 @@ export const ProfileContainer = styled.div`
       color: gray;
     }
   }
+
+  textarea {
+    width: 400px;
+    height: 100px;
+    padding: 15px 30px;
+    color: gray;
+    background: none;
+    border: 1px solid ${Colors.lightGray};
+    box-shadow: 1px 1px 5px ${Colors.lightGray};
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+
+    &::placeholder {
+      color: gray;
+    }
+  }
 `;
 
 export const ProfilePhoto = styled.div<{ photo: string }>`
-  width: 250px;
-  height: 250px;
+  width: 120px;
+  height: 120px;
   border-radius: 100%;
 
   background-image: url(${(p) => p.photo || defaulProfile});
@@ -51,6 +69,12 @@ export const ProfilePhoto = styled.div<{ photo: string }>`
   &:hover {
     box-shadow: 0px 0px 30px black;
   }
+`;
+
+export const ProfileName = styled.h2`
+  font-size: 30px;
+  margin: 20px 0px;
+  font-weight: 400;
 `;
 
 export const BtnContainer = styled.div`

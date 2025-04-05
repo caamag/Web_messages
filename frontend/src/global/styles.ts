@@ -27,6 +27,10 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         border: none;
     }
+
+    textarea {
+        resize: none;
+    }
 `;
 
 export const Container = styled.div`

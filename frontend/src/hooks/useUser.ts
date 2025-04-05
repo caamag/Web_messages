@@ -1,4 +1,8 @@
-import { updateUserName, updateUserPhoto } from "../services/user";
+import {
+  updateUserName,
+  updateUserPhoto,
+  updateUserDescription,
+} from "../services/user";
 import { useState } from "react";
 
 export const UserUser = () => {
@@ -46,11 +50,31 @@ export const UserUser = () => {
     }
   };
 
+  const handleUpdateUserDescription = async (description: string) => {
+    setLoading(true);
+    try {
+      await updateUserDescription(description);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 4000);
+    } catch (error) {
+      console.error("Error updating user description:", error);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     error,
     success,
     handleUpdateUserName,
     handleUpdateUserPhoto,
+    handleUpdateUserDescription,
   };
 };

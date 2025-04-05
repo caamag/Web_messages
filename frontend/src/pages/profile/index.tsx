@@ -17,6 +17,7 @@ const ProfilePage = () => {
 
   const [imageUrl, setImageUrl] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   const handleUpdate = () => {
     if (imageUrl) {
@@ -24,6 +25,9 @@ const ProfilePage = () => {
     }
     if (name) {
       userHook.handleUpdateUserName(name);
+    }
+    if (description) {
+      userHook.handleUpdateUserDescription(description);
     }
   };
 
@@ -44,19 +48,7 @@ const ProfilePage = () => {
           ) : (
             <>
               <Css.ProfilePhoto photo={user?.photoURL || ""} />
-
-              <label>
-                Profile image:
-                <br />
-                <input
-                  type="text"
-                  placeholder="Image URL:"
-                  value={imageUrl}
-                  onChange={(e) => {
-                    setImageUrl(e.target.value);
-                  }}
-                />
-              </label>
+              <Css.ProfileName>{user?.displayName}</Css.ProfileName>
 
               <label>
                 Name:
@@ -77,6 +69,29 @@ const ProfilePage = () => {
                 <input type="text" placeholder={user?.email || ""} disabled />
               </label>
               <br />
+
+              <label>
+                Profile image:
+                <br />
+                <input
+                  type="text"
+                  placeholder="Image URL:"
+                  value={imageUrl}
+                  onChange={(e) => {
+                    setImageUrl(e.target.value);
+                  }}
+                />
+              </label>
+
+              <label>
+                Description
+                <br />
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Talk about yourself..."
+                />
+              </label>
 
               <Css.BtnContainer>
                 <Button

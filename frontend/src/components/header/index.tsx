@@ -40,7 +40,7 @@ const Header = () => {
         </p>
 
         <Css.Photo
-          src={profile}
+          src={user?.photoURL || profile}
           onClick={() => {
             setIsOpen(!isOpen);
           }}

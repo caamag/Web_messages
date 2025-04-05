@@ -34,15 +34,11 @@ export const Profile = styled.div`
 `;
 
 export const Photo = styled.img`
+  border-radius: 100%;
   width: 40px;
   height: auto;
   cursor: pointer;
-  filter: invert(40%);
   transition: 150ms;
-
-  &:hover {
-    filter: invert(0%);
-  }
 `;
 
 const FadeInProfile = keyframes`
