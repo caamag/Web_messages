@@ -1,4 +1,4 @@
-# 🔗 SocialChat (Clone do WhatsApp Web com toque de rede social)
+# 🔗 Web_Messages (Clone do WhatsApp Web com toque de rede social)
 
 Este é um projeto em desenvolvimento inspirado no WhatsApp Web, mas com funcionalidades voltadas para o modelo de redes sociais. Nele, os usuários podem criar contas, enviar solicitações de amizade para outros usuários e iniciar conversas privadas apenas após a solicitação ser aceita.
 
