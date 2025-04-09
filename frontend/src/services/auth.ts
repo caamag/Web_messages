@@ -29,7 +29,7 @@ export const registerUser = async (
     email,
     description: "",
     id: user.uid,
-    photo: "",
+    photoURL: "",
     createdAt: new Date(),
   });
 };

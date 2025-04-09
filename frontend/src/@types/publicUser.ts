@@ -6,3 +6,9 @@ export type PublicUserProps = {
   createdAt: string;
   photo: string;
 };
+
+export type UpdatePublicUserProps = {
+  name: string | undefined;
+  photoURL: string | undefined;
+  description: string | undefined;
+};
