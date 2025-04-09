@@ -12,11 +12,12 @@ import { Button } from "../../components/UI/button";
 
 const ProfilePage = () => {
   const { user } = useAuth();
+
   const userHook = UserUser();
   const navigate = useNavigate();
 
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(user?.displayName ?? "");
   const [description, setDescription] = useState<string>("");
 
   const handleUpdate = () => {
@@ -64,7 +65,7 @@ const ProfilePage = () => {
               </label>
 
               <label>
-                Email:
+                Email*:
                 <br />
                 <input type="text" placeholder={user?.email || ""} disabled />
               </label>
@@ -84,7 +85,7 @@ const ProfilePage = () => {
               </label>
 
               <label>
-                Description
+                About:
                 <br />
                 <textarea
                   value={description}
