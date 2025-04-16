@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background: linear-gradient(20deg, ${Colors.darkBlue}, ${Colors.lightBlue});
+  background: ${Colors.darkGray};
   display: flex;
   align-items: center;
 `;

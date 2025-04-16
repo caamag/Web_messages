@@ -61,6 +61,7 @@ export const ProfileSettingContainer = styled.div`
   animation: 500ms ${FadeInProfile};
 
   background-color: white;
+  z-index: 10;
 `;
 
 export const ProfileSettingsList = styled.ul`

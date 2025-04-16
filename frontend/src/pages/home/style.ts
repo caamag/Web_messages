@@ -16,6 +16,22 @@ export const FriendsContainer = styled.div`
 export const ChatContainer = styled.div`
   width: 70%;
   height: 100%;
-  background-color: gray;
   border-bottom-right-radius: 10px;
+`;
+
+export const NoContentChat = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 10rem;
+  opacity: 0.3;
+
+  h3 {
+    font-size: 22px;
+    text-align: center;
+  }
 `;
