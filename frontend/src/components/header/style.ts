@@ -5,7 +5,7 @@ export const Header = styled.header`
   width: 100%;
   height: 80px;
 
-  background-color: ${Colors.lightGray};
+  background-color: ${Colors.secondBackground};
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 
@@ -18,6 +18,7 @@ export const Header = styled.header`
     font-size: 24px;
     margin-left: 20px;
     font-weight: 500;
+    color: white;
   }
 `;
 
@@ -30,6 +31,7 @@ export const Profile = styled.div`
     text-align: right;
     margin-right: 10px;
     font-size: 12px;
+    color: white;
   }
 `;
 

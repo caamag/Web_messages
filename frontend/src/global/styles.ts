@@ -46,7 +46,7 @@ export const Content = styled.div`
   max-width: 1600px;
   margin: 0 auto;
   height: calc(100% - 38px);
-  background-color: rgb(255, 255, 255, 0.2);
+  background-color: rgb(40, 40, 40, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
