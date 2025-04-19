@@ -50,6 +50,7 @@ export const Content = styled.div`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
+  overflow: hidden;
 `;
 
 export { GlobalStyle };

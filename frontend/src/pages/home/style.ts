@@ -104,3 +104,12 @@ export const NoContentChat = styled.div`
     text-align: center;
   }
 `;
+
+export const NoFriends = styled.div`
+  width: 100%;
+  padding-top: 100px;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 200;
+`;
