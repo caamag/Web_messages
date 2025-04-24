@@ -8,15 +8,14 @@ const LoadingAnimation = keyframes`
     }
 `;
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div<{ btnLoader?: boolean }>`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   img {
-    width: 50px;
-    height: 50px;
+    width: ${(p) => (p.btnLoader ? "25px" : "50px")};
     animation: ${LoadingAnimation} 600ms infinite linear;
   }
 `;

@@ -1,6 +1,17 @@
 import * as Css from "./style";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
+import { usePublicUser } from "../../hooks/usePublicUser";
+import { useState } from "react";
+
+//images
+import ProfileUser from "../../assets/profile-user.png";
+import { IoPersonAddOutline } from "react-icons/io5";
+
+//components
+import Loader from "../loader";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FriendsProps {
   isVisible: boolean;
@@ -8,8 +19,12 @@ interface FriendsProps {
 }
 
 const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
+  const { loading, search, userResult } = usePublicUser();
+  const [nameSearched, setNameSearched] = useState<string>("");
+
   return (
     <Css.SearchContainer isVisible={isVisible}>
+      <ToastContainer />
       <Css.FriendsHeader>
         <Css.SearchTitle>
           <button
@@ -24,10 +39,46 @@ const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
         <Css.SearchHeroContainer>
           <Css.SearchHero>
             <IoSearch />
-            <input type="text" placeholder="Search by name:" />
+            <input
+              type="text"
+              placeholder="Search by name:"
+              value={nameSearched}
+              onChange={(e) => {
+                setNameSearched(e.target.value);
+              }}
+            />
           </Css.SearchHero>
         </Css.SearchHeroContainer>
+        <button
+          className="search-button"
+          onClick={() => {
+            search(nameSearched);
+          }}
+        >
+          {loading ? <Loader btnLoader /> : "Search"}
+        </button>
       </Css.FriendsHeader>
+
+      {userResult.length > 0 && (
+        <Css.UsersResultContainer>
+          {userResult.map((user) => (
+            <Css.UserItem>
+              <Css.UserData>
+                <Css.UserProfile src={user.photo ?? ProfileUser} alt="" />
+                <Css.UserDescription>
+                  <b>{user.name}</b> <br />
+                  {user.email}
+                </Css.UserDescription>
+              </Css.UserData>
+              <IoPersonAddOutline
+                onClick={() => {
+                  console.log("clicado");
+                }}
+              />
+            </Css.UserItem>
+          ))}
+        </Css.UsersResultContainer>
+      )}
     </Css.SearchContainer>
   );
 };
