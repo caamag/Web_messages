@@ -19,7 +19,7 @@ interface FriendsProps {
 }
 
 const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
-  const { loading, search, userResult } = usePublicUser();
+  const helper = usePublicUser();
   const [nameSearched, setNameSearched] = useState<string>("");
 
   return (
@@ -52,29 +52,36 @@ const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
         <button
           className="search-button"
           onClick={() => {
-            search(nameSearched);
+            helper.search(nameSearched);
           }}
         >
-          {loading ? <Loader btnLoader /> : "Search"}
+          {helper.loading ? <Loader btnLoader /> : "Search"}
         </button>
       </Css.FriendsHeader>
 
-      {userResult.length > 0 && (
+      {helper.userResult.length > 0 && (
         <Css.UsersResultContainer>
-          {userResult.map((user) => (
+          {helper.userResult.map((user) => (
             <Css.UserItem>
-              <Css.UserData>
-                <Css.UserProfile src={user.photo ?? ProfileUser} alt="" />
-                <Css.UserDescription>
-                  <b>{user.name}</b> <br />
-                  {user.email}
-                </Css.UserDescription>
-              </Css.UserData>
-              <IoPersonAddOutline
-                onClick={() => {
-                  console.log("clicado");
-                }}
-              />
+              {helper.notificationLoader ? (
+                <Loader />
+              ) : (
+                <>
+                  <Css.UserData>
+                    <Css.UserProfile src={user.photo ?? ProfileUser} alt="" />
+                    <Css.UserDescription>
+                      <b>{user.name}</b> <br />
+                      {user.email}
+                    </Css.UserDescription>
+                  </Css.UserData>
+                  <IoPersonAddOutline
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      helper.handleUpdateNotification(user.id);
+                    }}
+                  />
+                </>
+              )}
             </Css.UserItem>
           ))}
         </Css.UsersResultContainer>

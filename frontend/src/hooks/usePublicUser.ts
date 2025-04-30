@@ -1,10 +1,16 @@
-import { useState } from "react";
-import { searchPublicUsers } from "../services/publicUser";
+import { useEffect, useState } from "react";
+import {
+  searchPublicUsers,
+  updateNotifications,
+  getCurrentPublicUser,
+} from "../services/publicUser";
 import { PublicUserProps } from "../@types/publicUser";
 import { toast } from "react-toastify";
 
 export const usePublicUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [notificationLoader, setNotificationLoader] = useState<boolean>(false);
+  const [publicUser, setPublicUser] = useState<any>();
 
   const [userResult, setUserResult] = useState<PublicUserProps[]>([]);
 
@@ -22,9 +28,27 @@ export const usePublicUser = () => {
     setUserResult(data);
   };
 
+  const handleUpdateNotification = async (userSelected: string) => {
+    setNotificationLoader(true);
+    await updateNotifications(userSelected);
+    setNotificationLoader(false);
+  };
+
+  const handleCurrentPublicUser = async () => {
+    const response = await getCurrentPublicUser();
+    setPublicUser(response);
+  };
+
+  useEffect(() => {
+    handleCurrentPublicUser();
+  }, []);
+
   return {
     loading,
+    notificationLoader,
     search,
     userResult,
+    handleUpdateNotification,
+    publicUser,
   };
 };

@@ -1,12 +1,14 @@
 import * as Css from "./style";
 import { Container, Content } from "../../global/styles";
 import { useState } from "react";
+import { usePublicUser } from "../../hooks/usePublicUser";
 
 //icons
 import { CiChat1 } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { IoPersonAddOutline } from "react-icons/io5";
+import { useAuth } from "../../context/AuthContext";
 
 //components
 import Header from "../../components/header";
@@ -14,6 +16,9 @@ import SearchNewFriend from "../../components/searchNewFriend";
 
 const HomePage = () => {
   const [newFriend, setNewFriend] = useState<boolean>(false);
+  const { user } = useAuth();
+  const { publicUser } = usePublicUser();
+  const notificationList = publicUser.notification.lenght;
 
   const changeVisibility = () => {
     setNewFriend(!newFriend);

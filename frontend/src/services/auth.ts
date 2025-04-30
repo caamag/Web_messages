@@ -30,6 +30,7 @@ export const registerUser = async (
     description: "",
     id: user.uid,
     photoURL: "",
+    notification: [],
     createdAt: new Date(),
   });
 };

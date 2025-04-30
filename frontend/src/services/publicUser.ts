@@ -2,13 +2,23 @@ import { auth } from "../firebase/firebase";
 import { db } from "../firebase/firebase";
 import {
   doc,
-  getDoc,
   updateDoc,
   collection,
   getDocs,
+  getDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { UpdatePublicUserProps } from "../@types/publicUser";
 import { PublicUserProps } from "../@types/publicUser";
+
+export const getCurrentPublicUser = async () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Usuário não está autenticado");
+
+  const userRef = doc(db, "publicUsers", user.uid);
+  const userSnap = await getDoc(userRef);
+  return userSnap.data();
+};
 
 export const searchPublicUsers = async (
   nameSearched: string
@@ -26,20 +36,6 @@ export const searchPublicUsers = async (
   return users.filter((user) =>
     user.name.toLowerCase().includes(nameSearched.toLowerCase())
   );
-};
-
-export const getPublicUserData = async () => {
-  const user = auth.currentUser;
-  if (!user) throw new Error("Usuário não está autenticado");
-
-  const userRef = doc(db, "publicUsers", user.uid);
-  const userSnap = await getDoc(userRef);
-
-  if (userSnap.exists()) {
-    return userSnap.data();
-  } else {
-    throw new Error("Usuário público não encontrado");
-  }
 };
 
 export const updatePublicUser = async (data: UpdatePublicUserProps) => {
@@ -65,4 +61,20 @@ export const updatePublicUser = async (data: UpdatePublicUserProps) => {
       photo: data.photoURL,
     });
   }
+};
+
+export const updateNotifications = async (userSelected: string) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Usuário não está autenticado");
+
+  const userRef = doc(db, "publicUsers", userSelected);
+
+  await updateDoc(userRef, {
+    notification: arrayUnion({
+      senderId: user.uid,
+      senderName: user.displayName,
+      senderEmail: user.email,
+      timestamp: new Date().toISOString(),
+    }),
+  });
 };

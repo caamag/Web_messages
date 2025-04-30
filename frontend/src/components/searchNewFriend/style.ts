@@ -116,6 +116,11 @@ export const UserItem = styled.div`
   svg {
     font-size: 20px;
     margin-right: 15px;
+    transition: 150ms;
+
+    &:hover {
+      scale: 1.2;
+    }
   }
 
   &:hover {
