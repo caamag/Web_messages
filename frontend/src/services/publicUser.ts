@@ -58,7 +58,7 @@ export const updatePublicUser = async (data: UpdatePublicUserProps) => {
 
   if (data.photoURL) {
     await updateDoc(userRef, {
-      photo: data.photoURL,
+      photoURL: data.photoURL,
     });
   }
 };
@@ -74,6 +74,7 @@ export const updateNotifications = async (userSelected: string) => {
       senderId: user.uid,
       senderName: user.displayName,
       senderEmail: user.email,
+      photo: user.photoURL,
       timestamp: new Date().toISOString(),
     }),
   });

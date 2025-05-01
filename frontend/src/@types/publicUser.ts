@@ -4,6 +4,15 @@ export type PublicUserProps = {
   email: string;
   name: string;
   createdAt: string;
+  photoURL: string;
+  notification: PublicUserNotifications[];
+};
+
+export type PublicUserNotifications = {
+  senderEmail: string;
+  senderId: string;
+  senderName: string;
+  timestamp: string;
   photo: string;
 };
 

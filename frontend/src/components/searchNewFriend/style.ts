@@ -5,6 +5,7 @@ export const SearchContainer = styled.div<{ isVisible: boolean }>`
   position: absolute;
   width: 30%;
   height: calc(100% - 80px);
+  z-index: 5;
 
   top: 80px;
   left: ${(p) => (p.isVisible ? "0%" : "-30%")};

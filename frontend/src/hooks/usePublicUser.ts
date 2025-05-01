@@ -6,11 +6,14 @@ import {
 } from "../services/publicUser";
 import { PublicUserProps } from "../@types/publicUser";
 import { toast } from "react-toastify";
+import { DocumentData } from "firebase/firestore";
 
 export const usePublicUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [notificationLoader, setNotificationLoader] = useState<boolean>(false);
-  const [publicUser, setPublicUser] = useState<any>();
+  const [publicUser, setPublicUser] = useState<
+    DocumentData | PublicUserProps
+  >();
 
   const [userResult, setUserResult] = useState<PublicUserProps[]>([]);
 
@@ -31,6 +34,7 @@ export const usePublicUser = () => {
   const handleUpdateNotification = async (userSelected: string) => {
     setNotificationLoader(true);
     await updateNotifications(userSelected);
+    toast.success("Request sent successfully");
     setNotificationLoader(false);
   };
 

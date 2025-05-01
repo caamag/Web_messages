@@ -8,17 +8,18 @@ import { CiChat1 } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { IoPersonAddOutline } from "react-icons/io5";
-import { useAuth } from "../../context/AuthContext";
 
 //components
 import Header from "../../components/header";
 import SearchNewFriend from "../../components/searchNewFriend";
+import NotificationModal from "../../components/notificationModal";
 
 const HomePage = () => {
   const [newFriend, setNewFriend] = useState<boolean>(false);
-  const { user } = useAuth();
+  const [openNotifications, setOpenNotifications] = useState<boolean>(false);
+
   const { publicUser } = usePublicUser();
-  const notificationList = publicUser.notification.lenght;
+  const notificationCount = publicUser?.notification.length;
 
   const changeVisibility = () => {
     setNewFriend(!newFriend);
@@ -26,6 +27,15 @@ const HomePage = () => {
 
   return (
     <Container>
+      {openNotifications && (
+        <NotificationModal
+          closeModal={() => {
+            setOpenNotifications(false);
+          }}
+          notifications={publicUser?.notification}
+        />
+      )}
+
       <Content>
         <Header />
         <Css.HomeContainer>
@@ -47,7 +57,15 @@ const HomePage = () => {
                   >
                     <IoPersonAddOutline />
                   </button>
-                  <button>
+                  <button
+                    className="notification-button"
+                    onClick={() => {
+                      setOpenNotifications(true);
+                    }}
+                  >
+                    <Css.NotificationCount>
+                      {notificationCount}
+                    </Css.NotificationCount>
                     <IoIosNotificationsOutline />
                   </button>
                 </div>

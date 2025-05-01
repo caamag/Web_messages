@@ -1,12 +1,12 @@
 import * as Css from "./style";
-import { FaArrowLeftLong } from "react-icons/fa6";
-import { IoSearch } from "react-icons/io5";
 import { usePublicUser } from "../../hooks/usePublicUser";
 import { useState } from "react";
 
 //images
 import ProfileUser from "../../assets/profile-user.png";
 import { IoPersonAddOutline } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 //components
 import Loader from "../loader";
@@ -68,7 +68,10 @@ const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
               ) : (
                 <>
                   <Css.UserData>
-                    <Css.UserProfile src={user.photo ?? ProfileUser} alt="" />
+                    <Css.UserProfile
+                      src={user.photoURL ?? ProfileUser}
+                      alt=""
+                    />
                     <Css.UserDescription>
                       <b>{user.name}</b> <br />
                       {user.email}

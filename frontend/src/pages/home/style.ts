@@ -28,13 +28,23 @@ export const HeaderChatContainer = styled.div`
   color: white;
 
   button {
+    position: relative;
     margin-right: 20px;
     background: none;
     color: white;
-    font-size: 20px;
+    font-size: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 150ms;
+
+    &:hover {
+      scale: 1.2;
+    }
+  }
+
+  .notification-button {
+    font-size: 28px;
   }
 
   h2 {
@@ -112,4 +122,19 @@ export const NoFriends = styled.div`
   color: white;
   font-size: 24px;
   font-weight: 200;
+`;
+
+export const NotificationCount = styled.p`
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  top: -8px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: red;
 `;
