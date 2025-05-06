@@ -6,7 +6,6 @@ import {
   collection,
   getDocs,
   getDoc,
-  arrayUnion,
 } from "firebase/firestore";
 import { UpdatePublicUserProps } from "../@types/publicUser";
 import { PublicUserProps } from "../@types/publicUser";
@@ -61,21 +60,4 @@ export const updatePublicUser = async (data: UpdatePublicUserProps) => {
       photoURL: data.photoURL,
     });
   }
-};
-
-export const updateNotifications = async (userSelected: string) => {
-  const user = auth.currentUser;
-  if (!user) throw new Error("Usuário não está autenticado");
-
-  const userRef = doc(db, "publicUsers", userSelected);
-
-  await updateDoc(userRef, {
-    notification: arrayUnion({
-      senderId: user.uid,
-      senderName: user.displayName,
-      senderEmail: user.email,
-      photo: user.photoURL,
-      timestamp: new Date().toISOString(),
-    }),
-  });
 };

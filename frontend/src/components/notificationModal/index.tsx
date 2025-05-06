@@ -8,46 +8,59 @@ import { FaCheckCircle } from "react-icons/fa";
 
 //components
 import { Modal } from "../UI/modal";
+import Loader from "../loader";
 
 interface NotificationModalProps {
   closeModal: () => void;
   notifications: PublicUserNotifications[];
+  recuse: (senderId: string) => void;
+  loading: boolean;
 }
 
 const NotificationModal = ({
-  closeModal,
   notifications,
+  ...props
 }: NotificationModalProps) => {
   return (
     <Modal>
       <Css.NotificationContent>
         <Css.CloseBtn
           onClick={() => {
-            closeModal();
+            props.closeModal();
           }}
         >
           <IoCloseCircle />
         </Css.CloseBtn>
         {notifications.map((notification) => (
           <Css.NotificationCard>
-            <Css.SenderData>
-              {" "}
-              <Css.SenderPhoto src={notification.photo ?? ProfileUser} />
-              <Css.SenderDescription>
-                {notification.senderName}
-                <br />
-                {notification.senderEmail}
-              </Css.SenderDescription>
-            </Css.SenderData>
+            {props.loading ? (
+              <Loader />
+            ) : (
+              <>
+                <Css.SenderData>
+                  {" "}
+                  <Css.SenderPhoto src={notification.photo ?? ProfileUser} />
+                  <Css.SenderDescription>
+                    {notification.senderName}
+                    <br />
+                    {notification.senderEmail}
+                  </Css.SenderDescription>
+                </Css.SenderData>
 
-            <Css.NotificationBtns>
-              <Css.RecuseBtn>
-                <IoCloseCircle />
-              </Css.RecuseBtn>
-              <Css.AcceptBtn>
-                <FaCheckCircle />
-              </Css.AcceptBtn>
-            </Css.NotificationBtns>
+                <Css.NotificationBtns>
+                  <Css.RecuseBtn
+                    onClick={async () => {
+                      props.recuse(notification.senderId);
+                    }}
+                  >
+                    <IoCloseCircle />
+                  </Css.RecuseBtn>
+                  <Css.AcceptBtn>
+                    <FaCheckCircle />
+                  </Css.AcceptBtn>
+                </Css.NotificationBtns>
+              </>
+            )}
           </Css.NotificationCard>
         ))}
       </Css.NotificationContent>

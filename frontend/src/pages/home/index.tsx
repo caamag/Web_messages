@@ -2,6 +2,7 @@ import * as Css from "./style";
 import { Container, Content } from "../../global/styles";
 import { useState } from "react";
 import { usePublicUser } from "../../hooks/usePublicUser";
+import { useNotification } from "../../hooks/useNotification";
 
 //icons
 import { CiChat1 } from "react-icons/ci";
@@ -19,6 +20,7 @@ const HomePage = () => {
   const [openNotifications, setOpenNotifications] = useState<boolean>(false);
 
   const { publicUser } = usePublicUser();
+  const { handleRecuseNotification, notificationLoader } = useNotification();
   const notificationCount = publicUser?.notification.length;
 
   const changeVisibility = () => {
@@ -33,6 +35,8 @@ const HomePage = () => {
             setOpenNotifications(false);
           }}
           notifications={publicUser?.notification}
+          recuse={handleRecuseNotification}
+          loading={notificationLoader}
         />
       )}
 

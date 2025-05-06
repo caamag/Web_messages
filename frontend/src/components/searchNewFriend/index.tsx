@@ -1,5 +1,6 @@
 import * as Css from "./style";
 import { usePublicUser } from "../../hooks/usePublicUser";
+import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
 
 //images
@@ -20,6 +21,7 @@ interface FriendsProps {
 
 const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
   const helper = usePublicUser();
+  const { notificationLoader, handleUpdateNotification } = useNotification();
   const [nameSearched, setNameSearched] = useState<string>("");
 
   return (
@@ -63,7 +65,7 @@ const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
         <Css.UsersResultContainer>
           {helper.userResult.map((user) => (
             <Css.UserItem>
-              {helper.notificationLoader ? (
+              {notificationLoader ? (
                 <Loader />
               ) : (
                 <>
@@ -80,7 +82,7 @@ const SearchNewFriend = ({ isVisible, changeVisibility }: FriendsProps) => {
                   <IoPersonAddOutline
                     onClick={(e) => {
                       e.stopPropagation();
-                      helper.handleUpdateNotification(user.id);
+                      handleUpdateNotification(user.id);
                     }}
                   />
                 </>

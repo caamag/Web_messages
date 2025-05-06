@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   searchPublicUsers,
-  updateNotifications,
   getCurrentPublicUser,
 } from "../services/publicUser";
 import { PublicUserProps } from "../@types/publicUser";
@@ -10,7 +9,6 @@ import { DocumentData } from "firebase/firestore";
 
 export const usePublicUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [notificationLoader, setNotificationLoader] = useState<boolean>(false);
   const [publicUser, setPublicUser] = useState<
     DocumentData | PublicUserProps
   >();
@@ -31,13 +29,6 @@ export const usePublicUser = () => {
     setUserResult(data);
   };
 
-  const handleUpdateNotification = async (userSelected: string) => {
-    setNotificationLoader(true);
-    await updateNotifications(userSelected);
-    toast.success("Request sent successfully");
-    setNotificationLoader(false);
-  };
-
   const handleCurrentPublicUser = async () => {
     const response = await getCurrentPublicUser();
     setPublicUser(response);
@@ -49,10 +40,9 @@ export const usePublicUser = () => {
 
   return {
     loading,
-    notificationLoader,
     search,
     userResult,
-    handleUpdateNotification,
     publicUser,
+    handleCurrentPublicUser,
   };
 };

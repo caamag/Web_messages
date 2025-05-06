@@ -42,7 +42,7 @@ export const CloseBtn = styled.button`
 
 export const NotificationCard = styled.div`
   width: 80%;
-  height: 60px;
+  height: 40px;
   max-width: 1200px;
   display: flex;
   align-items: center;
@@ -83,10 +83,11 @@ export const NotificationBtns = styled.div`
     justify-content: center;
     margin: 0px 5px;
     color: white;
+    opacity: 0.6;
     transition: 150ms;
 
     &:hover {
-      scale: 1.2;
+      opacity: 1;
     }
   }
 `;
